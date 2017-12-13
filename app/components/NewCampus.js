@@ -10,7 +10,6 @@ class NewCampus extends Component {
             this.state = {
 
                 name: "",
-                imageUrl: "",
                 description: ""
             }
             

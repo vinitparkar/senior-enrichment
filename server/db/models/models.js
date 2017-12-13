@@ -58,12 +58,7 @@ const Campuses = db.define('campuses',{
 
     imageUrl: {
         type: Sequelize.STRING,
-        set() {
-            if(this.getDataValue() === "")
-            this.setDataValue("https://www.cisco.com/c/en/us/solutions/design-zone/networking-design-guides/campus-wired-wireless/_jcr_content/Grid/subcategory_atl_5db5/layout-subcategory-atl/blade_a6cf/bladeContents/spotlight_c294/image.img.jpg/1503036863031.jpg" );
-        }
-        //defaultValue: "https://www.cisco.com/c/en/us/solutions/design-zone/networking-design-guides/campus-wired-wireless/_jcr_content/Grid/subcategory_atl_5db5/layout-subcategory-atl/blade_a6cf/bladeContents/spotlight_c294/image.img.jpg/1503036863031.jpg" 
-        
+        defaultValue: "https://www.cisco.com/c/en/us/solutions/design-zone/networking-design-guides/campus-wired-wireless/_jcr_content/Grid/subcategory_atl_5db5/layout-subcategory-atl/blade_a6cf/bladeContents/spotlight_c294/image.img.jpg/1503036863031.jpg" 
     },
 
     description: Sequelize.TEXT
