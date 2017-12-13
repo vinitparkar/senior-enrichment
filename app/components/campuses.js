@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchCampuses, delCampus} from '../reducers/campusesReducer';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {saveNewCampus} from '../reducers/newCampusReducer';
 
 
@@ -65,5 +65,5 @@ function mapDispatchToProps (dispatch) {
     };
 }
 
-const campusesContainer = connect(mapStateToProps, mapDispatchToProps)(Campuses);
+const campusesContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Campuses));
 export default campusesContainer;

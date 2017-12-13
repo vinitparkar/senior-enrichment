@@ -76,7 +76,7 @@ apiRouter.post('/campuses', (req, res, next) => {
 	.catch(next);
 });
 
-apiRouter.delete('/students/:campusId', (req, res, next) => {
+apiRouter.delete('/campuses/:campusId', (req, res, next) => {
 	Students.destroy({where: {id: req.params.campusId}})
 	.then(result => res.json(result))
 	.catch(next);

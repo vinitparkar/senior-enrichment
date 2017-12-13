@@ -5,6 +5,7 @@ import students from './studentReducer';
 import singleCampus from './singleCampusReducer';
 import newStudent from './newStudentReducer';
 import singleStudent from './singleStudentReducer'
+import newCampus from './newCampusReducer';
 
 const initialState = {}
 
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   campuses,
   singleCampus,
   newStudent,
-  singleStudent
+  singleStudent,
+  newCampus
 });
 
 export default rootReducer;
