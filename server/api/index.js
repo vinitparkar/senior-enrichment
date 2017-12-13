@@ -38,8 +38,9 @@ apiRouter.post('/students', (req, res, next) => {
 // })
 
 apiRouter.put('/students/:studentId', (req, res, next) => {
-	req.student.update(req.body)
-	.then(updatedStudent => res.json(updatedStudent))
+	//console.log("hello", req.body, req.params); Not working as planned. 
+	Students.update(req.body, {where: {id: req.params.studentId}, returning: true})
+	.then(result => res.json(result))
 	.catch(next);
 });
 
@@ -72,6 +73,12 @@ apiRouter.get('/campuses', (req, res, next) => {
 apiRouter.post('/campuses', (req, res, next) => {
 	Campuses.create(req.body)
 	.then(campus=> res.json(campus))
+	.catch(next);
+});
+
+apiRouter.delete('/students/:campusId', (req, res, next) => {
+	Students.destroy({where: {id: req.params.campusId}})
+	.then(result => res.json(result))
 	.catch(next);
 });
 

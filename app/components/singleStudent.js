@@ -95,7 +95,7 @@ class SingleStudent extends Component {
                         <tbody>
                             <tr>
                                 <td><input type="text" name="firstName" onChange={this.firstNameChange} />  </td>
-                                <td><input type="text" name="lastName" onChange={this.lasttNameChange}/>  </td>
+                                <td><input type="text" name="lastName" onChange={this.lastNameChange}/>  </td>
                                 <td><input type="text" name="email" onChange={this.emailChange}/>  </td>
                                 <td><input type="text" name="gpa" onChange={this.gpaChange}/>  </td>
                                 <td>

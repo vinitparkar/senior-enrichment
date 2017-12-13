@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchCampuses} from '../reducers/campusesReducer';
+import {fetchCampuses, delCampus} from '../reducers/campusesReducer';
 import {Link} from 'react-router-dom';
 import {saveNewCampus} from '../reducers/newCampusReducer';
 
 
 class Campuses extends Component {
+
+    constructor(){
+        super();
+        
+        this.removeCampus = this.removeCampus.bind(this);
+    }
+
+    removeCampus(event) {
+        this.props.deleteCampus(event.target.value);
+    }
 
     componentDidMount() {
         this.props.loadCampuses();
@@ -26,6 +36,9 @@ class Campuses extends Component {
                             <img src={campus.imageUrl} />
                             <li>{campus.name}</li>
                             </Link>
+                            <button className="btn btn-danger btn-sm" value={campus.id} onClick={this.removeCampus}>
+                                <span className="glyphicon glyphicon-remove-sign"></span>
+                            </button>
                         </div>
                     ))}
                     </ul>
@@ -45,6 +58,9 @@ function mapDispatchToProps (dispatch) {
     return {
         loadCampuses: function(){
             dispatch(fetchCampuses());
+        },
+        deleteCampus: function(id){
+            dispatch(delCampus(id));
         }
     };
 }

@@ -31,7 +31,7 @@ export const fetchSingleStudent = (id) => {
 
 export const putSingleStudent = function (data, id, history) {
     return function(dispatch) {
-        axios.put(`/students/${id}`,data)
+        axios.put(`/api/students/${id}`,data)
         .then(response => {dispatch(updateSingleStudent(response.data));
         history.push('/students')})
         .catch(console.error);
