@@ -13,25 +13,26 @@ const newStudent = (newStudent) => {
 };
 
 //Thunk Action Creator
-export const saveNewStudent = (id) => {
+export const saveNewStudent = (student, history) => {
     return function(dispatch) {
-        axios.get(`/api/campuses/${id}`)
-        .then(response => {dispatch(getSingleCampus(response.data)); })
+        axios.post(`/api/students`, student)
+        .then(response => {dispatch(newStudent(response.data)); 
+        history.push('/students'); })
         .catch(console.error);
     }
 };
 
 //Reducer
 
-const singleCampusReducer = (state = [], action) => {
+const newStudentReducer = (state = [], action) => {
 
     switch(action.type){
-        case GET_SINGLE_CAMPUS:
-            return action.singleCampus;
+        case NEW_STUDENT:
+            return action.newStudent;
         default:
             return state;
     }
 };
 
-export default singleCampusReducer;
+export default newStudentReducer;
 

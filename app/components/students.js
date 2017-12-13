@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {fetchStudents} from '../reducers/studentReducer';
+import {Link, withRouter} from 'react-router-dom';
+import {fetchStudents, delStudent} from '../reducers/studentReducer';
 
 class Students extends Component {
 
     constructor(){
         super();
-        this.deleteStudent = this.deleteStudent.bind(this);
+        
+        this.removeStudent = this.removeStudent.bind(this);
     }
     
     componentDidMount() {
         this.props.loadStudents();
     }
 
-    deleteStudent() {
-
+    removeStudent(event) {
+        this.props.deleteStudent(event.target.value);
     }
 
     render() {
@@ -23,14 +24,14 @@ class Students extends Component {
         return (
             <div>
                 <Link to='/newstudent'> 
-                    <button className="btn btn-danger btn-xs" onClick={this.componentDelete}>
+                    <button className="btn btn-success btn-xs">
                         <span className="glyphicon glyphicon-plus"></span>
                     </button>
                 </Link>
                 <table className='table'>
                 <thead>
                 <tr>
-                    <th></th>
+                    <th>#</th>
                     <th>Name</th>
                     <th>Campus</th>
                     <th></th>
@@ -40,11 +41,19 @@ class Students extends Component {
 
                 {Students && Students.map(student => (
                     <tr key={student.id}>
-                        <td> {student.id} </td>
-                        <td> {student.name} </td>
-                        <td> {student.campusId} </td>
+                        
+                        <td> 
+                            {student.id} 
+                        </td>
+                        <td> 
+                            <Link to={`/students/${student.id}`}> {student.name} </Link> 
+                        </td>
+                        <td> 
+                            <Link to={`/campuses/${student.campusId}`}>{student.campus.name} </Link> 
+                        </td>
+
                         <td>
-                            <button className="btn btn-danger btn-xs" onClick={this.deleteStudent}>
+                            <button className="btn btn-danger btn-sm" value={student.id} onClick={this.removeStudent}>
                                 <span className="glyphicon glyphicon-remove-sign"></span>
                             </button>
                         </td>
@@ -71,9 +80,12 @@ function mapDispatchToProps (dispatch) {
     return {
         loadStudents: function(){
             dispatch(fetchStudents());
+        },
+        deleteStudent: function(id){
+            dispatch(delStudent(id));
         }
     };
 }
 
-const studentsContainer = connect(mapStateToProps, mapDispatchToProps)(Students);
+const studentsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Students));
 export default studentsContainer;

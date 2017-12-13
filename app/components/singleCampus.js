@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {fetchSingleCampus} from '../reducers/singleCampusReducer';
-import store from '../store';
 
 
 class SingleCampus extends Component {
@@ -9,6 +9,7 @@ class SingleCampus extends Component {
     componentDidMount(){
         this.props.loadSingleCampus();
     }
+
 
     render() {
         const singleCampus = this.props.singleCampus;
@@ -23,13 +24,12 @@ class SingleCampus extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {singleCampus && singleCampus.map((student) => {
-                            //console.log(student.name);
+                        {singleCampus && singleCampus.map((student) => (
                             <tr key={student.id}>
                                 <td> {student.id} </td>
-                                <td> {student.name} </td>
+                                <td> <Link to={`/students/${student.id}`}>{student.name} </Link> </td>
                             </tr>
-                        })}
+                        ))}
                 
                     </tbody>
                 </table>

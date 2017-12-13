@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchCampuses} from '../reducers/campusesReducer';
 import {Link} from 'react-router-dom';
+import {saveNewCampus} from '../reducers/newCampusReducer';
+
 
 class Campuses extends Component {
 
@@ -11,16 +13,23 @@ class Campuses extends Component {
 
     render() {
             return (
-                <ul>
-                  {this.props.campuses.map(campus => (
-                    <div className="col-xs-4" key={campus.id}>
-                        <Link to={`/campuses/${campus.id}` } >
-                        <img src={campus.imageUrl} />
-                        <li>{campus.name}</li>
-                        </Link>
-                    </div>
-                  ))}
-                </ul>
+                <div id="all-campuses">
+                    <Link to='/newcampus'> 
+                        <button className="btn btn-success btn-xs">
+                            <span className="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </Link>
+                    <ul>
+                    {this.props.campuses.map(campus => (
+                        <div className="col-xs-4" key={campus.id}>
+                            <Link to={`/campuses/${campus.id}` } >
+                            <img src={campus.imageUrl} />
+                            <li>{campus.name}</li>
+                            </Link>
+                        </div>
+                    ))}
+                    </ul>
+                </div> 
               );
         }
 }
